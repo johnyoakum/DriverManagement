@@ -34,3 +34,13 @@ I have to tell you that using this script for creating the driver packs, takes t
 Notes:
 1. On line 154, I am excluding one particular model because I found in my testing that the download link in the XML for this model was wrong and would just error out, so I am skipping it.
 
+#Task Sequence Step
+You need to add a task sequence step for downloading and applying drivers. It is a single step necessary for finding and applying drivers. I will say that the guys I listed abve have a newer process that leverages the Admin Service and I would highly recommend checking it out, but these scripts are based on a little bit older processes, but work well.
+
+You need to create a package with the powershell script Invoke_DriverDetectionByModel.ps1 and then add a Run Powershell Script step with that package you created and the following parameters:
+-URI "http://FQDN/ConfigMgrWebService/ConfigMgr.asmx" -SecretKey "{SecretKeyFromYourWebService}" -Filter "Drivers"
+
+Here's a snapshot of the step:
+![image](https://user-images.githubusercontent.com/17698593/111930197-30385a80-8a6d-11eb-8c3c-4009d8b06fbe.png)
+
+I hope that this helps out for others that still like the web service and dynamic drivers. I will try to modify this in the future that leverages the Admin Service, but I haven't worked with that yet, but once I do, I will create a new repo that uses that instead.
